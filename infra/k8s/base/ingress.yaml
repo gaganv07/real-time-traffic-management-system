@@ -12,14 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: traffic-web
-                port:
-                  number: 3000
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: traffic-api
+                name: traffic-platform
                 port:
                   number: 8000
-

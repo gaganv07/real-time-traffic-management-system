@@ -1,5 +1,7 @@
 # API Overview
 
+The primary API surface is now served by the Python FastAPI platform.
+
 ## Main REST Domains
 
 - `/api/v1/auth`: login, token refresh, logout
@@ -13,7 +15,7 @@
 - `/api/v1/notifications`: message delivery and alert status
 - `/api/v1/health`: liveness and readiness
 
-## Implemented Endpoints In This Scaffold
+## Implemented Endpoints In The Python Platform
 
 | Method | Path | Purpose | Auth |
 | --- | --- | --- | --- |
@@ -23,6 +25,8 @@
 | `GET` | `/api/v1/signals/overview` | Current adaptive signal plans | Yes |
 | `GET` | `/api/v1/incidents/overview` | Active incidents and severity state | Yes |
 | `GET` | `/api/v1/analytics/overview` | Dashboard KPI summary and forecast snapshot | Yes |
+| `POST` | `/api/v1/predict/traffic` | Predict density and recommended green time | No |
+| `POST` | `/api/v1/detect/incident` | Score a frame reference for incident labels | No |
 
 ## Planned Expansion Endpoints
 
@@ -35,17 +39,16 @@
 
 ## Request Validation
 
-- Login requests are validated with Zod
-- RBAC is enforced after JWT authentication
-- Rate limiting is applied globally to protect high-traffic endpoints
+- Request bodies are validated with Pydantic
+- JWT issuance is handled in the FastAPI platform
+- WebSocket clients subscribe through `/ws/live`
 
 ## WebSocket Events
 
-- `traffic:update`
-- `signal:update`
-- `incident:created`
-- `incident:resolved`
-- `emergency:priority`
-- `analytics:forecast`
+- `/ws/live` streams a JSON payload with:
+- `traffic`
+- `signals`
+- `incidents`
+- `analytics`
 
-Swagger/OpenAPI is exposed from the API service at `/docs`.
+Swagger/OpenAPI is exposed by FastAPI at `/docs`.

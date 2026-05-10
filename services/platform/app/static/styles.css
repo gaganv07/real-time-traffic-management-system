@@ -1,0 +1,242 @@
+:root {
+  --bg: #07111e;
+  --bg-alt: #10223d;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --text: #edf4ff;
+  --muted: #98acc9;
+  --accent: #49c7a9;
+  --warning: #ffb74d;
+  --danger: #ff6078;
+  --sky: #68a8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(104, 168, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 80% 0%, rgba(73, 199, 169, 0.16), transparent 22%),
+    linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 45%, #050c16 100%);
+}
+
+.page-shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+
+.hero,
+.main-grid,
+.lower-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  grid-template-columns: 1.6fr 0.8fr;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  margin: 12px 0 12px;
+  font-size: clamp(2.4rem, 4vw, 4.6rem);
+  line-height: 1.04;
+  max-width: 980px;
+}
+
+.eyebrow,
+.mode-label,
+.kpi-label {
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(152, 172, 201, 0.8);
+  font-size: 0.78rem;
+}
+
+.subcopy,
+.panel-heading p,
+.mode-meta,
+.kpi-detail {
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 28px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 54px rgba(4, 11, 22, 0.34);
+}
+
+.mode-card,
+.kpi-card,
+.map-panel,
+.chart-panel,
+.lower-grid .panel {
+  padding: 22px;
+}
+
+.mode-value {
+  color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.kpi-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 24px;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 14px 0 10px;
+}
+
+.main-grid {
+  grid-template-columns: 1.15fr 0.85fr;
+  margin-bottom: 24px;
+}
+
+.lower-grid {
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.panel-heading h2 {
+  margin: 0 0 6px;
+}
+
+.status-pill {
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.status-pill.danger {
+  background: rgba(255, 96, 120, 0.16);
+  color: var(--danger);
+}
+
+.status-pill.accent {
+  background: rgba(73, 199, 169, 0.16);
+  color: var(--accent);
+}
+
+.traffic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 320px;
+}
+
+.grid-cell {
+  min-height: 88px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.grid-cell.critical { background: rgba(255, 96, 120, 0.18); }
+.grid-cell.high { background: rgba(255, 183, 77, 0.18); }
+.grid-cell.moderate { background: rgba(73, 199, 169, 0.16); }
+.grid-cell.low,
+.grid-cell.neutral { background: rgba(255, 255, 255, 0.04); }
+
+.chart {
+  display: flex;
+  align-items: end;
+  gap: 14px;
+  min-height: 320px;
+  padding-top: 24px;
+}
+
+.chart-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.density-bar,
+.speed-bar {
+  width: 22px;
+  border-radius: 999px;
+}
+
+.density-bar { background: var(--accent); }
+.speed-bar { background: var(--sky); margin-top: 8px; }
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.data-table th {
+  color: var(--muted);
+  font-weight: 500;
+  border-top: 0;
+}
+
+.signal-list,
+.incident-list {
+  display: grid;
+  gap: 12px;
+}
+
+.signal-item,
+.incident-item {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.signal-item span,
+.incident-item span,
+.signal-item small,
+.incident-item small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .hero,
+  .main-grid,
+  .lower-grid,
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

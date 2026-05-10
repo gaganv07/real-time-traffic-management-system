@@ -10,17 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build shared and services
-        run: npm run build
-      - name: Install AI dependencies
+          python-version: "3.11"
+      - name: Install platform dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r services/ai/requirements.txt
-      - name: Run API tests
-        run: npm run test --workspace @traffic/api
-
+          pip install -r services/platform/requirements.txt pytest
+      - name: Compile platform
+        run: python -m compileall services/platform/app
+      - name: Run platform tests
+        working-directory: services/platform
+        run: pytest -q

@@ -1,34 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: traffic-api
+  name: traffic-platform
   namespace: traffic-system
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: traffic-api
+      app: traffic-platform
   template:
     metadata:
       labels:
-        app: traffic-api
+        app: traffic-platform
     spec:
       containers:
-        - name: api
-          image: ghcr.io/example/traffic-api:latest
+        - name: platform
+          image: ghcr.io/example/traffic-platform:latest
           ports:
             - containerPort: 8000
           env:
-            - name: PORT
-              value: "8000"
-            - name: REDIS_URL
-              value: redis://traffic-redis:6379
-            - name: AI_SERVICE_URL
-              value: http://traffic-ai:8001
+            - name: ENVIRONMENT
+              value: production
           readinessProbe:
             httpGet:
               path: /api/v1/health
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
-

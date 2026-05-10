@@ -10,18 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install node dependencies
-        run: npm install
-      - name: Build workspaces
-        run: npm run build
-      - name: Install AI dependencies
-        run: pip install -r services/ai/requirements.txt
-      - name: Compile AI service
-        run: python -m compileall services/ai/app
-
+      - name: Install platform dependencies
+        run: pip install -r services/platform/requirements.txt pytest
+      - name: Compile platform
+        run: python -m compileall services/platform/app
+      - name: Run platform tests
+        working-directory: services/platform
+        run: pytest -q

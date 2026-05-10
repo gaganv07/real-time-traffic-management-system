@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="page-shell">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Smart City Command Center</p>
+      <h1>Real-time traffic intelligence for congestion control, emergency routing, and predictive signal operations.</h1>
+      <p class="subcopy">Python-first FastAPI platform with live telemetry, AI-assisted decisions, smart signal orchestration, and operator dashboards.</p>
+    </div>
+    <div class="mode-card">
+      <p class="mode-label">Mode</p>
+      <p class="mode-value">Adaptive network orchestration</p>
+      <p class="mode-meta">Live WebSocket telemetry and emergency corridor automation</p>
+    </div>
+  </section>
+
+  <section class="kpi-grid">
+    {% for item in kpis %}
+    <article class="panel kpi-card">
+      <p class="kpi-label">{{ item.label }}</p>
+      <p class="kpi-value">{{ item.value }}</p>
+      <p class="kpi-detail">{{ item.detail }}</p>
+    </article>
+    {% endfor %}
+  </section>
+
+  <section class="main-grid">
+    <article class="panel map-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>City Traffic Grid</h2>
+          <p>Live map placeholder ready for Leaflet or GIS layers.</p>
+        </div>
+        <span class="status-pill danger">{{ incidents|length }} incidents active</span>
+      </div>
+      <div class="traffic-grid">
+        {% for item in traffic %}
+        <div class="grid-cell {{ item.congestion_level }}">
+          <span>{{ item.intersection_id }}</span>
+          <strong>{{ (item.density_score * 100)|int }}%</strong>
+        </div>
+        {% endfor %}
+        {% for i in range(9) %}
+        <div class="grid-cell neutral"></div>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="panel chart-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Congestion Forecast</h2>
+          <p>Short-range LSTM-ready trend line rendered in lightweight HTML.</p>
+        </div>
+        <span class="status-pill accent">Python analytics</span>
+      </div>
+      <div class="chart">
+        {% for point in chart_points %}
+        <div class="chart-bar">
+          <div class="density-bar" style="height: {{ point.density }}%"></div>
+          <div class="speed-bar" style="height: {{ point.speed }}%"></div>
+          <span>{{ point.time }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+  </section>
+
+  <section class="lower-grid">
+    <article class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Critical Corridors</h2>
+          <p>Priority intersections for operator action.</p>
+        </div>
+      </div>
+      <table class="data-table" id="traffic-table">
+        <thead>
+          <tr>
+            <th>Intersection</th>
+            <th>Congestion</th>
+            <th>Speed</th>
+            <th>Queue</th>
+            <th>Occupancy</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in traffic %}
+          <tr>
+            <td>{{ item.intersection_id }}</td>
+            <td>{{ item.congestion_level }}</td>
+            <td>{{ item.average_speed_kph }} kph</td>
+            <td>{{ item.queue_length }}</td>
+            <td>{{ (item.lane_occupancy * 100)|int }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </article>
+
+    <article class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Signal Plans</h2>
+          <p>Adaptive timings and emergency override visibility.</p>
+        </div>
+      </div>
+      <div class="signal-list" id="signal-list">
+        {% for signal in signals %}
+        <div class="signal-item">
+          <strong>{{ signal.intersection_id }}</strong>
+          <span>{{ signal.phase }}</span>
+          <small>{{ signal.green_duration_seconds }}s green</small>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Active Incidents</h2>
+          <p>Emergency and enforcement feed.</p>
+        </div>
+      </div>
+      <div class="incident-list" id="incident-list">
+        {% for incident in incidents %}
+        <div class="incident-item">
+          <strong>{{ incident.type|capitalize }}</strong>
+          <span>{{ incident.description }}</span>
+          <small>{{ incident.severity }} severity</small>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+  </section>
+</main>
+{% endblock %}
+

@@ -1,11 +1,11 @@
 # Folder Structure
 
 ```text
+services/
+  platform/
+  ai/
 apps/
   web/
-services/
-  api/
-  ai/
 packages/
   shared/
 database/
@@ -22,4 +22,3 @@ docs/
 tests/
 scripts/
 ```
-

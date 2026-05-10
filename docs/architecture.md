@@ -2,15 +2,15 @@
 
 ## High-Level Design
 
-The platform uses a modular smart city architecture built around an API gateway, event-driven telemetry streams, and specialized AI services.
+The platform now uses a Python-first smart city architecture built around a FastAPI command platform, event-driven telemetry streams, and integrated AI decision services.
 
 1. Cameras, IoT edge devices, traffic signals, GPS-equipped emergency vehicles, and operator clients send telemetry into the platform.
-2. The Node.js API gateway authenticates users, exposes REST APIs, and publishes live domain events through WebSockets.
+2. The FastAPI platform authenticates users, renders HTML dashboards, exposes REST APIs, and publishes live domain events through WebSockets.
 3. Redis stores short-lived congestion state, signal plans, and live queue data for low-latency reads.
 4. PostgreSQL stores transactional entities such as users, cameras, signals, incidents, routing plans, and notifications.
 5. MongoDB stores high-volume logs, analytics snapshots, audit trails, and AI inference metadata.
-6. The FastAPI AI service provides traffic density estimation, accident detection scoring, congestion forecasting, and signal optimization recommendations.
-7. The Next.js dashboard consumes REST data for configuration views and WebSockets for live monitoring.
+6. The Python services provide traffic density estimation, accident detection scoring, congestion forecasting, and signal optimization recommendations.
+7. Server-rendered HTML templates and lightweight browser JavaScript provide the command dashboard with live updates.
 
 ## Architecture Diagram Explanation
 
@@ -18,15 +18,13 @@ The platform uses a modular smart city architecture built around an API gateway,
 [Cameras / Signals / GPS / Edge Sensors]
                  |
                  v
-        [Ingestion + API Gateway]
-         | REST     | WebSocket
-         |          v
-         |      [Dashboard]
+        [FastAPI Traffic Platform]
+      HTML UI | REST API | WebSocket
          |
          +--> [Redis Live State]
          +--> [PostgreSQL Core Data]
          +--> [MongoDB Logs & Analytics]
-         +--> [FastAPI AI Services]
+         +--> [Python AI Decision Services]
                       |
                       v
          [Predictions / Detection / Optimization]
@@ -46,5 +44,4 @@ The platform uses a modular smart city architecture built around an API gateway,
 - `domain`: traffic entities, invariants, and shared types
 - `application`: orchestration logic, use cases, and policies
 - `infrastructure`: databases, Redis caching, WebSocket transport, and external notifications
-- `presentation`: REST controllers, websocket handlers, and dashboard components
-
+- `presentation`: REST routers, websocket handlers, and Jinja2 HTML templates
