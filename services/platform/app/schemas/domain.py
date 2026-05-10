@@ -63,3 +63,7 @@ class DetectionResponse(BaseModel):
     confidence: float
     severity: str
 
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str = Field(min_length=8)

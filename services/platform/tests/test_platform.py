@@ -31,3 +31,18 @@ def test_prediction_endpoint():
     response = client.post("/api/v1/predict/traffic", json=payload)
     assert response.status_code == 200
     assert response.json()["recommended_green_seconds"] >= 40
+
+
+def test_login_endpoint_validates_and_returns_profile():
+    response = client.post(
+        "/api/v1/auth/login",
+        json={"email": "admin@traffic.local", "password": "securepass123"},
+    )
+    assert response.status_code == 200
+    assert response.json()["profile"]["email"] == "admin@traffic.local"
+
+
+def test_simulation_endpoint_returns_requested_rows():
+    response = client.get("/api/v1/simulate/traffic?seed_count=4")
+    assert response.status_code == 200
+    assert len(response.json()["items"]) == 4

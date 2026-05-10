@@ -48,7 +48,14 @@ Open:
 - Dashboard: `http://localhost:8000`
 - API health: `http://localhost:8000/api/v1/health`
 - Traffic APIs: `http://localhost:8000/api/v1/traffic/overview`
+- Simulation API: `http://localhost:8000/api/v1/simulate/traffic`
 - WebSocket live feed: `ws://localhost:8000/ws/live`
+
+Windows shortcut:
+
+```powershell
+.\scripts\start-platform.ps1
+```
 
 ### Docker
 

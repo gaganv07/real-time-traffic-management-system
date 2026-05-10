@@ -25,6 +25,8 @@ The primary API surface is now served by the Python FastAPI platform.
 | `GET` | `/api/v1/signals/overview` | Current adaptive signal plans | Yes |
 | `GET` | `/api/v1/incidents/overview` | Active incidents and severity state | Yes |
 | `GET` | `/api/v1/analytics/overview` | Dashboard KPI summary and forecast snapshot | Yes |
+| `GET` | `/api/v1/dashboard/context` | Aggregated dashboard payload for thin clients | No |
+| `GET` | `/api/v1/simulate/traffic` | Mock telemetry generator for demos and tests | No |
 | `POST` | `/api/v1/predict/traffic` | Predict density and recommended green time | No |
 | `POST` | `/api/v1/detect/incident` | Score a frame reference for incident labels | No |
 

@@ -106,3 +106,17 @@ def generate_chart_points() -> list[dict]:
         {"time": "21:00", "density": 53, "speed": 38},
     ]
 
+
+def generate_mock_simulation(seed_count: int = 6) -> list[dict]:
+    now = _now()
+    return [
+        {
+            "intersection_id": f"INT-{index + 1:03d}",
+            "timestamp": (now + timedelta(minutes=index * 5)).isoformat(),
+            "vehicle_count": 84 + index * 14,
+            "average_speed_kph": max(18, 40 - index * 3),
+            "lane_occupancy": round(0.41 + index * 0.06, 2),
+            "density_score": round(min(0.32 + index * 0.1, 0.95), 2),
+        }
+        for index in range(seed_count)
+    ]
