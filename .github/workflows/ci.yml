@@ -8,6 +8,8 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: services/platform
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -18,5 +20,4 @@ jobs:
       - name: Compile platform
         run: python -m compileall services/platform/app
       - name: Run platform tests
-        working-directory: services/platform
-        run: pytest -q
+        run: python -m pytest -q services/platform/tests
