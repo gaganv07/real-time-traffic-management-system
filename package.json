@@ -1,0 +1,17 @@
+{
+  "name": "real-time-traffic-management-system",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @traffic/web & npm run dev --workspace @traffic/api",
+    "build": "npm run build --workspace @traffic/shared && npm run build --workspace @traffic/api && npm run build --workspace @traffic/web",
+    "lint": "npm run lint --workspace @traffic/api && npm run lint --workspace @traffic/web",
+    "test": "npm run test --workspace @traffic/api && npm run test --workspace @traffic/web"
+  }
+}
+

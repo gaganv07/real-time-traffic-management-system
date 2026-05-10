@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build shared and services
+        run: npm run build
+      - name: Install AI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r services/ai/requirements.txt
+      - name: Run API tests
+        run: npm run test --workspace @traffic/api
+

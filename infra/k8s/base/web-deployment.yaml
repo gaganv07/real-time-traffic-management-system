@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-web
+  namespace: traffic-system
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traffic-web
+  template:
+    metadata:
+      labels:
+        app: traffic-web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/example/traffic-web:latest
+          ports:
+            - containerPort: 3000
+

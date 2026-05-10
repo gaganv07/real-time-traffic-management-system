@@ -1,0 +1,23 @@
+[
+  {
+    "intersection_id": "INT-001",
+    "hour_of_day": 8,
+    "day_of_week": 1,
+    "vehicle_count": 132,
+    "average_speed_kph": 22,
+    "lane_occupancy": 0.82,
+    "weather_factor": 1.2,
+    "event_factor": 1.1
+  },
+  {
+    "intersection_id": "INT-002",
+    "hour_of_day": 14,
+    "day_of_week": 2,
+    "vehicle_count": 88,
+    "average_speed_kph": 31,
+    "lane_occupancy": 0.56,
+    "weather_factor": 1.0,
+    "event_factor": 1.0
+  }
+]
+
